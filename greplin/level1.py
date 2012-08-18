@@ -14,8 +14,8 @@ def main():
 	As an example, if the input was "I like racecars that go fast"
 	the password would be "racecar".
 	"""
-	# Track the palindromes we locate in the corpus.
-	palindromes = []
+	# Track the longest palindrome.
+	longest = ''
 
 	# Read the gettysburg text.
 	text = urlopen('http://challenge.greplin.com/static/gettysburg.txt').read()
@@ -33,21 +33,18 @@ def main():
 			# Extract the substring.
 			substring = text[back:position + 1]
 
-			# If the substring isn't one character long, and it is
-			# the same as itself in reverse, it's a palindrome.
-			if len(substring) > 1 and substring == substring[::-1]:
+			# If the substring is the same as itself in reverse
+			# and it's longer than the current longest palindrome,
+			# make it the new longest one.
+			if substring == substring[::-1] and len(substring) > len(longest):
 
-				# Add it to our list of palindromes.
-				palindromes.append(substring)
+				longest = substring
 
 			# Decrement our back position.
 			back -= 1
 
-	# Sort the palindromes by length.
-	palindromes.sort(key=len, reverse=True)
-
 	# And print the password to level 2.
-	print 'The password to level 2 is "%s".' % palindromes[0]
+	print 'The password to level 2 is "%s".' % longest
 
 
 if __name__ == '__main__':
