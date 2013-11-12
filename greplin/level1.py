@@ -1,4 +1,4 @@
-from urllib2 import urlopen
+ #!/usr/bin/env python
 
 def main():
 	"""
@@ -18,28 +18,22 @@ def main():
 	longest = ''
 
 	# Read the gettysburg text.
-	text = urlopen('http://challenge.greplin.com/static/gettysburg.txt').read()
+	text = open('gettysburg.txt', 'r').read()
 
 	# Enumerate over each letter in the corpus.
 	for position, letter in enumerate(text):
-
 		# Track the current position, we will use this
 		# value to loop backwards with.
 		back = position
-
 		# While the back variable isn't 0.
 		while back != 0:
-
 			# Extract the substring.
 			substring = text[back:position + 1]
-
 			# If the substring is the same as itself in reverse
 			# and it's longer than the current longest palindrome,
 			# make it the new longest one.
 			if substring == substring[::-1] and len(substring) > len(longest):
-
 				longest = substring
-
 			# Decrement our back position.
 			back -= 1
 
